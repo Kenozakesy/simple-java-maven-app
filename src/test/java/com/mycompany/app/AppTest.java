@@ -2,6 +2,8 @@ package com.mycompany.app;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.After;
@@ -27,6 +29,11 @@ public class AppTest
         } catch (Exception e) {
             fail("Construction failed.");
         }
+    }
+
+    @Test
+    public void test() {
+        Assert.assertTrue(false);
     }
 
     @Test
