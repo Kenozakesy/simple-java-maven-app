@@ -10,6 +10,21 @@ pipeline {
             steps {
                 sh 'mvn -B -DskipTests clean package' 
             }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'     
+                }
+                success {
+                    slackSend channel: '#jenkins',
+                    color: 'green',
+                    message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} ${STAGE_NAME} SUCCEEDED \n More info at: ${env.BUILD_URL}"
+                }
+                failure {
+                    slackSend channel: '#jenkins',
+                    color: 'red',
+                    message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} ${STAGE_NAME} FAILED \n More info at: ${env.BUILD_URL}"
+                }
+            }
         }
 		stage('UNIT-TEST') { 
             steps {
