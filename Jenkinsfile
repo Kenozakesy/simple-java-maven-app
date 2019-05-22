@@ -38,7 +38,7 @@ pipeline {
 
             steps {
                 withSonarQubeEnv('sonarqube') {
-                    sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+                    sh "${scannerHome}/bin/sonar-scanner"
                 }
 
                 timeout(time: 10, unit: 'MINUTES') {
