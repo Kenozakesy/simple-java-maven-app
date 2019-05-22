@@ -15,23 +15,24 @@ pipeline {
             steps {
                 sh 'mvn test' 
             }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml' 
+                    
+                }
+                success {
+                    slackSend channel: '#jenkins',
+                    color: 'green',
+                    message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} UNITTEST SUCCEEDED \n More info at: ${env.BUILD_URL}"
+                }
+                failure {
+                    slackSend channel: '#jenkins',
+                    color: 'red',
+                    message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} UNITTEST FAILED \n More info at: ${env.BUILD_URL}"
+                }
+            }
           
         }
     }
-    post {
-            always {
-                junit 'target/surefire-reports/*.xml' 
-                
-            }
-            success {
-                slackSend channel: '#jenkins',
-                color: 'green',
-                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
-            }
-            failure {
-                slackSend channel: '#jenkins',
-                color: 'red',
-                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
-            }
-    }
+   
 }
