@@ -30,7 +30,6 @@ pipeline {
                     message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} ${STAGE_NAME} FAILED \n More info at: ${env.BUILD_URL}"
                 }
             }
-          // '${STAGE_NAME}'
         }
     }
     
