@@ -20,7 +20,7 @@ pipeline {
                     junit 'target/surefire-reports/*.xml' 
 					
                 }
-                succes {
+                success {
                     slackSend channel: '#jenkins',
                     color: 'green',
                     message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
