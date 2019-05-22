@@ -33,7 +33,7 @@ public class AppTest
 
     @Test
     public void test() {
-        Assert.assertTrue(true);
+        Assert.assertTrue(false);
     }
 
     @Test
